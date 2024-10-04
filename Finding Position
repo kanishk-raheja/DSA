@@ -1,0 +1,29 @@
+#include<iostream>
+using namespace std;
+int findelement(int* arr,int n,int check)
+{
+    int j;
+    for(int i=0;i<n;i++)
+    {
+        if(arr[i]==check)
+        {
+            j=i+1;
+        }
+    }
+   cout<<j;
+}
+
+int main()
+{
+    int n;
+    cin>>n;
+
+    int arr[n];
+    for(int i=0;i<n;i++)
+    {
+        cin>>arr[i];
+    }
+    int check;
+    cin>>check;
+    findelement(arr,n,check);
+}

@@ -1,0 +1,74 @@
+#include <iostream>
+using namespace std;
+
+class Node {
+public:
+    int data;
+    Node* next;
+    Node* prev;
+
+    // Constructor to initialize a new node
+    Node(int val) {
+        data = val;
+        next = nullptr;
+        prev = nullptr;
+    }
+};
+
+class DoublyLinkedList {
+private:
+    Node* head;
+
+public:
+    // Constructor to initialize an empty list
+    DoublyLinkedList() {
+        head = nullptr;
+    }
+
+    // Insert a node at the end of the list
+    void insertAtEnd(int val) {
+        Node* newNode = new Node(val);
+
+        // If the list is empty
+        if (head == nullptr) {
+            head = newNode;
+            return;
+        }
+
+        // Traverse to the last node
+        Node* temp = head;
+        while (temp->next != nullptr) {
+            temp = temp->next;
+        }
+
+        // Insert the new node at the end
+        temp->next = newNode;
+        newNode->prev = temp;
+    }
+
+    // Print the list from head to tail
+    void printList() {
+        Node* temp = head;
+        while (temp != nullptr) {
+            cout << temp->data << " ";
+            temp = temp->next;
+        }
+        cout << endl;
+    }
+};
+
+int main() {
+    DoublyLinkedList list;
+
+    // Inserting nodes
+    list.insertAtEnd(10);
+    list.insertAtEnd(20);
+    list.insertAtEnd(30);
+    list.insertAtEnd(40);
+
+    // Printing the list
+    cout << "Doubly Linked List: ";
+    list.printList();
+
+    return 0;
+}

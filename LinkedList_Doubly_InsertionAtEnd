@@ -1,0 +1,71 @@
+#include <iostream>
+
+using namespace std;
+
+// Node structure for the Doubly Linked List
+struct Node {
+    int key;
+    Node* prev;
+    Node* next;
+
+    Node(int k) : key(k), prev(nullptr), next(nullptr) {} // Constructor
+};
+
+// Class for the Doubly Linked List
+class DoublyLinkedList {
+private:
+    Node* head;
+    Node* tail;
+    int size;
+
+public:
+    DoublyLinkedList() : head(nullptr), tail(nullptr), size(0) {} // Constructor
+
+    // Function to insert a node at the end of the list
+    void insertAtEnd(int k) {
+        Node* newNode = new Node(k); // Create a new node
+
+        if (head == nullptr) {
+            head = tail = newNode; // If the list is empty
+        } else {
+            tail->next = newNode; // Link current tail to the new node
+            newNode->prev = tail; // Link new node's prev to current tail
+            tail = newNode; // Move tail to the new node
+        }
+        size++;
+        cout << "Inserted node with key: " << k << " at the end." << endl; // Confirmation message
+    }
+
+    // Function to traverse and print the list
+    void traverse() {
+        Node* current = head; // Start from the head
+        while (current != nullptr) {
+            cout << current->key << " "; // Print key of the node
+            current = current->next; // Move to the next node
+        }
+        cout << endl;
+    }
+
+    // Destructor to free allocated memory
+    ~DoublyLinkedList() {
+        while (head != nullptr) {
+            Node* temp = head;
+            head = head->next; // Move head to next node
+            delete temp; // Free memory
+        }
+    }
+};
+
+// Driver Code
+int main() {
+    DoublyLinkedList dll;
+
+    // Inserting nodes at the end of the list
+    dll.insertAtEnd(10);
+    dll.insertAtEnd(20);
+    dll.insertAtEnd(30);
+    cout << "Linked List after inserting nodes at the end: ";
+    dll.traverse();
+
+    return 0;
+}
